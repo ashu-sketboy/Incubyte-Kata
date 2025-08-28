@@ -7,16 +7,21 @@ void main() {
   group("Basic Calculator Test(Kata)", () {
    test('Invalid String', () {        
     expect(
-      () => getNumberFromString("adsf, asdkfl, adsf"), 
+      () => add("adsf, asdkfl, adsf"), 
       throwsA(isA<InvalidNumberException>())
       );
    });
 
    test('Negative number', () {
     expect(
-      () => getNumberFromString("2,-1,3,-4"),
+      () => add("2,-1,3,-4"),
       throwsA(isA<NegativeNumberException>())
     );
+   });
+
+   test('With new line', () {
+    int sum = add("1\n2,3");
+    expect(sum, equals(6));
    });
   });
 }

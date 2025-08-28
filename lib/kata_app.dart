@@ -14,10 +14,13 @@ int add(String number) {
 }
 
 List<int> _getNumberFromString(String number) {
-  number = _filterString(number);  
+  List<String> numAndDelimiter = _filterString(number);  
+  number = numAndDelimiter[0];
+  String delimiter = numAndDelimiter[1];
+  
   List<int> negativeNumbers = [];
 
-  List<int> nums = number.split(',').map((String num) {
+  List<int> nums = number.split(delimiter).map((String num) {
       int? number = int.tryParse(num);
 
       if (number == null) {
@@ -36,6 +39,17 @@ List<int> _getNumberFromString(String number) {
     return nums;
 }
 
-String _filterString(String number) {
-  return number.replaceAll("\n", ",");  
+List<String> _findDelimiter(String number) {
+  if (number.substring(0, 2) != "//") {
+    return [number, ','];
+  }
+
+  return [number.substring(4), number.substring(2, 3)];
+}
+
+List<String> _filterString(String number) {
+  List<String> numDelimiter = _findDelimiter(number);
+  number = numDelimiter[0];
+  String delimiter = numDelimiter[1];
+  return [number.replaceAll("\n", delimiter), delimiter];  
 }

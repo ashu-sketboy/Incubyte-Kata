@@ -4,7 +4,7 @@ import 'package:kata_app/kata_app.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group("Basic Calculator Test(Kata)", () {
+  group("Basic Calculator Test(Kata)", () {    
    test('Invalid String', () {        
     expect(
       () => add("adsf, asdkfl, adsf"), 
@@ -20,8 +20,13 @@ void main() {
    });
 
    test('With new line', () {
-    int sum = add("1\n2,3");
-    expect(sum, equals(6));
-   });
-  });
+      int sum = add("1\n2,3");
+      expect(sum, equals(6));
+    });
+
+   test("With Delemeter ';'", () {
+      int sum = add("//;\n1;2;3");
+      expect(sum, equals(6));
+    });    
+  });    
 }
